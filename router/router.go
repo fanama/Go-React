@@ -6,23 +6,22 @@ import (
 	"net/http"
 )
 
-type person struct {
-	Name     string
-	LastName string
-	Age      uint8
-}
-
 // Handler ...
 func Handler(w http.ResponseWriter, r *http.Request) {
-	person := person{Name: "Shashank", LastName: "Tiwari", Age: 30}
+
+	type Person struct {
+		Name     string
+		LastName string
+		Age      uint8
+	}
+
+	person := Person{Name: "Shashank", LastName: "Tiwari", Age: 30}
 
 	jsonResponse, jsonError := json.Marshal(person)
 
 	if jsonError != nil {
 		fmt.Println("Unable to encode JSON")
 	}
-
-	fmt.Println(string(jsonResponse))
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
