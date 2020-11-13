@@ -1,1 +1,5 @@
 my-Api.exe
+node_modules
+dev
+public
+.cache
