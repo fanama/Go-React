@@ -22,3 +22,8 @@
   - linux :
     - > go build ./cmd/main.go
 
+
+## Frontend
+
+- créer un dossier *public* et placez vos pages
+- si vous n'avez pas de pages vous pouvez éditer le contenu de *frontend* et le compiler via npm
