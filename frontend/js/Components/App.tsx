@@ -1,33 +1,35 @@
 import * as React from 'react'
-import { useState } from 'react'
 import {render} from 'react-dom'
-import { postier } from '../Postier'
-
+import axios from "axios"
 
 export default function App() {
 
-    const [user, setUser] = useState<string>("")
-    const [token, setToken] = useState<string>("")
-
-    const [inputtoken, setInputToken] = useState<string>("")
+    const [username,setUsername] = React.useState("")
+    const [password,setPassword] = React.useState("")
 
 
-
-    const getToken = (e:React.FormEvent<HTMLFormElement>)=>{
+    const send = (e)=>{
         e.preventDefault()
-        postier.sendRequest(user,setToken)
+
+        axios.post("/login",{username,password}).then(res=>{
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+
+
     }
 
     return (
         <div>
-            <form onSubmit={getToken}>
-                <h2>username</h2>
-                <input value={user} onChange={(e)=>{setUser(e.target.value)}} />
-                <button>show all</button>
+            <h1>hello react</h1>
+
+            <form onSubmit={send}  >
+                <input type="text" value={username} name="username" onChange={e=>{setUsername(e.target.value)}} />
+                <input type="password" value={password} name="password" onChange={e=>{setPassword(e.target.value)}} />
+                <button>log in</button>
             </form>
-            <form>
-                {(token!="")?`you are ${token}`:null}
-            </form>
+
         </div>
     )
 }
